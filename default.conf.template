@@ -1,8 +1,10 @@
-server {
-  listen $PORT default_server;
-
+upstream backend  {
+  server digitalocean.com;
+  server blog.merothau.com;
+  
+}
+ server {
   location / {
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
+    proxy_pass  http://backend;
   }
 }
